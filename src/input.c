@@ -1331,6 +1331,53 @@ GLFWAPI int glfwGetGamepadState(int jid, GLFWgamepadstate* state)
     return GLFW_TRUE;
 }
 
+GLFWAPI int glfwGetGamepadCapabilities(int jid, GLFWgamepadcapabilities* caps)
+{
+    int i;
+    _GLFWjoystick* js;
+
+    assert(jid >= GLFW_JOYSTICK_1);
+    assert(jid <= GLFW_JOYSTICK_LAST);
+    assert(caps != NULL);
+
+    memset(caps, 0, sizeof(GLFWgamepadcapabilities));
+
+    _GLFW_REQUIRE_INIT_OR_RETURN(GLFW_FALSE);
+
+    if (jid < 0 || jid > GLFW_JOYSTICK_LAST)
+    {
+        _glfwInputError(GLFW_INVALID_ENUM, "Invalid joystick ID %i", jid);
+        return GLFW_FALSE;
+    }
+
+    js = _glfw.joysticks + jid;
+    if (!js->connected)
+        return GLFW_FALSE;
+
+    // if (!_glfwPlatformPollJoystick(js, _GLFW_POLL_ALL))
+    //     return GLFW_FALSE;
+
+    if (!js->mapping)
+        return GLFW_FALSE;
+
+    // Loop through. Determine whether or not a mapping exists for
+    // each button and axis.
+
+    for (i = 0;  i <= GLFW_GAMEPAD_BUTTON_LAST;  i++)
+    {
+        const _GLFWmapelement* e = js->mapping->buttons + i;
+        caps->buttons[i] = e->type != 0;
+    }
+
+    for (i = 0;  i <= GLFW_GAMEPAD_AXIS_LAST;  i++)
+    {
+        const _GLFWmapelement* e = js->mapping->axes + i;
+        caps->axis[i] = e->type != 0;
+    }
+
+    return GLFW_TRUE; 
+}
+
 GLFWAPI void glfwSetClipboardString(GLFWwindow* handle, const char* string)
 {
     assert(string != NULL);

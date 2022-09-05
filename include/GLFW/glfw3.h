@@ -786,6 +786,18 @@ extern "C" {
  */
 #define GLFW_NO_WINDOW_CONTEXT      0x0001000A
 /*! @} */
+/*! @brief The specified cursor shape is not available.
+  *
+  *  The specified standard cursor shape is not available, either because the
+  *  current system cursor theme does not provide it or because it is not
+  *  available on the platform.
+  *
+  *  @analysis Platform or system settings limitation.  Pick another
+  *  [standard cursor shape](@ref shapes) or create a
+  *  [custom cursor](@ref cursor_custom).
+  */
+ #define GLFW_CURSOR_UNAVAILABLE     0x0001000B
+ /*! @} */
 
 /*! @addtogroup window
  *  @{ */
@@ -1090,18 +1102,82 @@ extern "C" {
  *
  *  The hand shape.
  */
-#define GLFW_HAND_CURSOR            0x00036004
+#define GLFW_POINTING_HAND_CURSOR            0x00036004
 /*! @brief The horizontal resize arrow shape.
  *
  *  The horizontal resize arrow shape.
  */
-#define GLFW_HRESIZE_CURSOR         0x00036005
+#define GLFW_RESIZE_EW_CURSOR         0x00036005
 /*! @brief The vertical resize arrow shape.
  *
  *  The vertical resize arrow shape.
  */
-#define GLFW_VRESIZE_CURSOR         0x00036006
+#define GLFW_RESIZE_NS_CURSOR         0x00036006
 /*! @} */
+#define GLFW_RESIZE_NS_CURSOR       0x00036006
+/*! @brief The top-left to bottom-right diagonal resize/move arrow shape.
+*
+*  The top-left to bottom-right diagonal resize/move shape.  This is usually
+*  a diagonal double-headed arrow.
+*
+*  @note @macos This shape is provided by a private system API and may fail
+*  with @ref GLFW_CURSOR_UNAVAILABLE in the future.
+*
+*  @note @x11 This shape is provided by a newer standard not supported by all
+*  cursor themes.
+*
+*  @note @wayland This shape is provided by a newer standard not supported by
+*  all cursor themes.
+*/
+#define GLFW_RESIZE_NWSE_CURSOR     0x00036007
+/*! @brief The top-right to bottom-left diagonal resize/move arrow shape.
+*
+*  The top-right to bottom-left diagonal resize/move shape.  This is usually
+*  a diagonal double-headed arrow.
+*
+*  @note @macos This shape is provided by a private system API and may fail
+*  with @ref GLFW_CURSOR_UNAVAILABLE in the future.
+*
+*  @note @x11 This shape is provided by a newer standard not supported by all
+*  cursor themes.
+*
+*  @note @wayland This shape is provided by a newer standard not supported by
+*  all cursor themes.
+*/
+#define GLFW_RESIZE_NESW_CURSOR     0x00036008
+/*! @brief The omni-directional resize/move cursor shape.
+*
+*  The omni-directional resize cursor/move shape.  This is usually either
+*  a combined horizontal and vertical double-headed arrow or a grabbing hand.
+*/
+#define GLFW_RESIZE_ALL_CURSOR      0x00036009
+/*! @brief The operation-not-allowed shape.
+*
+*  The operation-not-allowed shape.  This is usually a circle with a diagonal
+*  line through it.
+*
+*  @note @x11 This shape is provided by a newer standard not supported by all
+*  cursor themes.
+*
+*  @note @wayland This shape is provided by a newer standard not supported by
+*  all cursor themes.
+*/
+#define GLFW_NOT_ALLOWED_CURSOR     0x0003600A
+/*! @brief Legacy name for compatibility.
+*
+*  This is an alias for compatibility with earlier versions.
+*/
+#define GLFW_HRESIZE_CURSOR         GLFW_RESIZE_EW_CURSOR
+/*! @brief Legacy name for compatibility.
+*
+*  This is an alias for compatibility with earlier versions.
+*/
+#define GLFW_VRESIZE_CURSOR         GLFW_RESIZE_NS_CURSOR
+/*! @brief Legacy name for compatibility.
+*
+*  This is an alias for compatibility with earlier versions.
+*/
+#define GLFW_HAND_CURSOR            GLFW_POINTING_HAND_CURSOR
 
 #define GLFW_CONNECTED              0x00040001
 #define GLFW_DISCONNECTED           0x00040002

@@ -2076,6 +2076,11 @@ typedef struct GLFWgamepadstate
     float axes[6];
 } GLFWgamepadstate;
 
+typedef struct GLFWgamepadcapabilities
+{
+    int buttons[15];
+    int axis[6];
+} GLFWgamepadcapabilities;
 /*! @brief
  *
  *  @sa @ref init_allocator
@@ -5789,6 +5794,8 @@ GLFWAPI const char* glfwGetGamepadName(int jid);
  *  @ingroup input
  */
 GLFWAPI int glfwGetGamepadState(int jid, GLFWgamepadstate* state);
+
+GLFWAPI int glfwGetGamepadCapabilities(int jid, GLFWgamepadcapabilities* caps);
 
 /*! @brief Sets the clipboard to the specified string.
  *
